@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#this program allows you to download music from youtube videos in mp3 format
 input="cc"
 
 until [[ -z "${input// }" ]]; do
