@@ -1,0 +1,21 @@
+#!/bin/bash
+#gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=$3 $1 $2
+
+
+if [ $# -lt 3 ]; then
+	echo "Illegal number of parameters"
+fi
+
+
+argc=$#
+argv=("$@")
+end=$((argc-1))
+
+gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=temp.pdf $1 $2
+
+for (( j=2; j<end; j++ )); do
+	gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=temp1.pdf temp.pdf ${argv[j]}
+	mv temp1.pdf temp.pdf
+done
+
+mv temp.pdf ${argv[j]}
